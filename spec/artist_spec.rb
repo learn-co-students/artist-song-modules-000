@@ -1,4 +1,5 @@
 require_relative './spec_helper'
+require 'pry'
 
 describe Artist do
   before(:each) do
@@ -11,40 +12,7 @@ describe Artist do
   # http://betterspecs.org/#let
   let!(:artist){Artist.new}
 
-
-  it "can be initialized" do
-    expect(artist).to be_an_instance_of(Artist)
-  end
-
-  it "can have a name" do
-    artist.name = "Adele"
-    expect(artist.name).to eq("Adele")
-  end
-
-  it 'converts its name to a url friendly parameter' do
-    artist.name = 'Miley Cyrus'
-    expect(artist.to_param).to eq("miley-cyrus")
-  end
-
-  describe "Class methods" do
-    it "keeps track of the artists that have been created" do
-      expect(Artist.all).to include(artist)
-    end
-
-    it "can count how many artists have been created" do
-      expect(Artist.count).to eq(1)
-    end
-
-    it "can find an artist by name" do
-      artist.name = 'Miley Cyrus'
-      expect(Artist.find_by_name('Miley Cyrus')).to eq(artist)
-    end
-
-    it "can reset the artists that have been created" do
-      Artist.reset_all
-      expect(Artist.count).to eq(0)
-    end
-  end
+  it_behaves_like "song and artist", { name: "Miley Cyrus", converted_name: "miley-cyrus" }
 
   describe "with songs" do
     let(:song){Song.new}
