@@ -2,10 +2,6 @@ require_relative './spec_helper'
 
 RSpec.shared_examples "custom class" do 
 
-	before(:each) do
-    theclass.reset_all
-  end
-
 	it "can be initialized" do
 		expect(subject).to be_an_instance_of(theclass)
 	end
@@ -19,9 +15,9 @@ RSpec.shared_examples "custom class" do
     subject.name = 'Clowny Cupcake'
     expect(subject.to_param).to eq("clowny-cupcake")
   end
-
   describe "Class methods" do
     it "keeps track of the subjects that have been created" do
+      theclass.reset_all
       expect(theclass.all).to include(subject)
     end
 
