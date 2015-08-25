@@ -1,4 +1,4 @@
-class Test
+class Testers
   attr_accessor :name
   attr_reader :songs
   @@artists = []
